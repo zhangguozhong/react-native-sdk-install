@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 
 public class DownloadAndInstall {
