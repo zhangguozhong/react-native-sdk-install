@@ -1,17 +1,28 @@
-
 {
   "name": "react-native-sdk-install",
   "version": "1.0.0",
-  "description": "",
+  "description": "封装好的react-native下载并自动安装apk的组件。",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "download",
+    "android",
+    "apk",
+    "install"
   ],
-  "author": "",
-  "license": "",
+  "author": "zhangguozhong",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangguozhong/react-native-sdk-install.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhangguozhong/react-native-sdk-install/issues"
+  },
+  "homepage": "https://github.com/zhangguozhong/react-native-sdk-install#readme",
   "peerDependencies": {
     "react-native": "^0.41.2"
   }
