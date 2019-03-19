@@ -23,11 +23,11 @@ public class RNSdkInstallModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void downloadAndInstall(final String url) {
+  public void downloadAndInstall(final String url, final boolean forceUpdate, final String applicationId) {
     PermissionUtils.permissionsCheck(getCurrentActivity(),new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE },new PermissionUtils.OnPermissionListener() {
       @Override
       public void onPermissionGranted() {
-        DownloadAndInstall.start(url, getCurrentActivity(),getReactApplicationContext());
+        DownloadAndInstall.start(url,forceUpdate, getCurrentActivity(),applicationId);
       }
       @Override
       public void onPermissionDenied(String[] deniedPermissions) {
