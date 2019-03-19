@@ -1,7 +1,7 @@
 import ProgressBarModal from './views/ProgressBarModal';
 import { NativeModules,DeviceEventEmitter,Platform } from 'react-native';
 const { RNSdkInstall } = NativeModules;
-const listenerEvents = {}; //监听事件
+let listenerEvents = {}; //监听事件
 
 export default class InstallSDK {
 
@@ -27,6 +27,8 @@ export default class InstallSDK {
             const eventItem = listenerEvents[eventName];
             eventItem && eventItem.remove();
         }
+
+        listenerEvents = {};
     }
 };
 
