@@ -145,7 +145,6 @@ public final class PermissionUtils {
                             if (grantResult == PackageManager.PERMISSION_DENIED) {
                                 if (listener != null) {
                                     listener.onPermissionDenied(missingPermissions);
-
                                 }
                                 return true;
                             }

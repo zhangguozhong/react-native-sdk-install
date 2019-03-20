@@ -73,14 +73,12 @@ public class ApkDownloadDialog extends AlertDialog {
 
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
         mHasStarted = true;
     }
 
     @Override
     protected void onStop() {
-        // TODO Auto-generated method stub
         super.onStop();
         mHasStarted = false;
     }

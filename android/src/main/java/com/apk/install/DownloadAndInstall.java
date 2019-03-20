@@ -2,7 +2,9 @@ package com.apk.install;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -26,6 +28,7 @@ import java.net.URL;
 
 public class DownloadAndInstall {
     public static int REQUEST_CODE_APP_INSTALL = 0x00002019;
+    public static int CANCEL_APP_INSTALL = 0x00002020;
     private static final int DOWN_ERROR = 0x00003;
     private static Handler mHandler;
     private static String application_id = null;
@@ -65,7 +68,7 @@ public class DownloadAndInstall {
                     file = getFileFromServer(url,apkDownloadDialog,activity.getDir("tmp", Context.MODE_PRIVATE));
                     apkDownloadDialog.dismiss();
                     //安装APK
-                    checkIsAndroidO(file,activity);
+                    installApk(file,activity);
 
                     Looper.loop();
                 }catch (Exception e) {
@@ -87,15 +90,8 @@ public class DownloadAndInstall {
         }
 
         Uri packageUri = Uri.parse("package:" + context.getPackageName());
-        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageUri);
+        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,packageUri);
         ((Activity)context).startActivityForResult(intent,REQUEST_CODE_APP_INSTALL);
-    }
-
-    public static void installOApk(final Activity activity) {
-        if (activity == null || file == null) {
-            return;
-        }
-        checkIsAndroidO(file,activity);
     }
 
     /*
@@ -108,6 +104,24 @@ public class DownloadAndInstall {
             if (b) {
                 installApk(file, activity);
             } else {
+//                new AlertDialog.Builder(activity)
+//                        .setTitle("温馨提示")
+//                        .setMessage("安装应用需要打开未知来源权限，请去设置中开启应用权限，以允许安装来自此来源的应用")
+//                        .setNeutralButton("取消", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.dismiss();
+//                            }
+//                        })
+//                        .setPositiveButton("去设置", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                                    startInstallPermissionSettingActivity(activity);
+//                                }
+//                            }
+//                        }).show();
+
                 //请求安装未知应用来源的权限
                 PermissionUtils.requestPermissions(activity, 0x11, new String[]{
                         Manifest.permission.REQUEST_INSTALL_PACKAGES}, new PermissionUtils.OnPermissionListener() {
@@ -207,7 +221,11 @@ public class DownloadAndInstall {
             } else {
                 intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
             }
-            activity.startActivity(intent);
+
+            if (activity.getPackageManager().queryIntentActivities(intent, 0).size() > 0) {
+                //如果APK安装界面存在，携带请求码跳转。使用forResult是为了处理用户 取消 安装的事件。外面这层判断理论上来说可以不要，但是由于国内的定制，这个加上还是比较保险的
+                activity.startActivityForResult(intent,CANCEL_APP_INSTALL);
+            }
             android.os.Process.killProcess(android.os.Process.myPid());
         }catch (Exception e) {
             e.printStackTrace();
