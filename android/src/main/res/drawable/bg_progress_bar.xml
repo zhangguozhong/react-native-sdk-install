@@ -3,8 +3,8 @@
     <!-- 设置背景色（黑色） -->
     <item android:id="@android:id/background">
         <shape>
-            <!--<corners android:radius="@dimen/dp12"/>-->
-            <solid android:color="#331000"/>
+            <corners android:radius="3dp"/>
+            <solid android:color="#e1e1e1"/>
         </shape>
     </item>
 
@@ -12,11 +12,8 @@
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <gradient
-                    android:angle="45"
-                    android:endColor="#2DC8FE"
-                    android:startColor="#149EFF" />
-                <!--<corners android:radius="@dimen/dp4" />-->
+                <corners android:radius="3dp" />
+                <solid android:color="#2593fc"/>
             </shape>
         </clip>
     </item>
