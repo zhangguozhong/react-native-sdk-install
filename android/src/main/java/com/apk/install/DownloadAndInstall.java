@@ -2,9 +2,7 @@ package com.apk.install;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -15,6 +13,7 @@ import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -36,7 +35,7 @@ public class DownloadAndInstall {
 
     @SuppressLint("HandlerLeak")
     public static void start(final String url, final boolean forceUpdate, final Activity activity, final String applicationId) {
-        if (url == null) {
+        if (TextUtils.isEmpty(url) || TextUtils.isEmpty(applicationId)) {
             return;
         }
 
