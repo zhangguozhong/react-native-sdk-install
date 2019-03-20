@@ -34,6 +34,7 @@ import InstallSDK from 'react-native-sdk-install';
 
 //检车版本更新下载并提示安装
 doCheckUpdate = () => {
+    //先检测是否有新版本，确认更新后再执行下载更新逻辑
     InstallSDK.downloadAndInstall('https://domain/app-release.apk',forceUpdate,applicationId);
 };
 ```
