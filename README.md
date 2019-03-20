@@ -30,9 +30,35 @@
 
 ## Usage
 ```javascript
-import RNSdkInstall from 'react-native-sdk-install';
+import InstallSDK from 'react-native-sdk-install';
 
-// TODO: What to do with the module?
-RNSdkInstall;
+//检车版本更新下载并提示安装
+doCheckUpdate = () => {
+    InstallSDK.downloadAndInstall('https://domain/app-release.apk',forceUpdate,applicationId);
+};
 ```
+
+## 注意的地方
+
+1、android 8.0以上系统需要在清单文件AndroidManifest.xml中配置权限以及provider：
+```javascript
+
+<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+<provider
+    android:name="android.support.v4.content.FileProvider"
+    android:authorities="${applicationId}.fileprovider"
+    android:exported="false"
+    android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+</provider>
+
+```
+
+2、InstallSDK.downloadAndInstall方法的applicationId参数取决于provider的android:authorities属性，传packageName或applicationId。
+
+
+
   
