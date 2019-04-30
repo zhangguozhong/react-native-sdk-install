@@ -31,6 +31,7 @@
 ## Usage
 ```javascript
 import InstallUtil from 'react-native-sdk-install';
+
 doCheckUpdate = () => {
     InstallUtil.downloadAndInstall('https://domain/app-release.apk',forceUpdate);
 };
