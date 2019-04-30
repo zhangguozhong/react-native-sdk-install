@@ -1,7 +1,7 @@
 {
   "name": "react-native-sdk-install",
-  "version": "1.0.0",
-  "description": "封装好的react-native下载并自动安装apk的组件，兼容android 8.0以上系统。",
+  "version": "1.0.1",
+  "description": "封装好的react-native应用内更新apk版本的组件，兼容android 8.0以上系统。",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

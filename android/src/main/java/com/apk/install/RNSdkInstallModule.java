@@ -2,6 +2,7 @@
 package com.apk.install;
 
 import android.Manifest;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -23,11 +24,11 @@ public class RNSdkInstallModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void downloadAndInstall(final String url, final boolean forceUpdate, final String applicationId) {
+  public void downloadAndInstall(final String url, final boolean forceUpdate) {
     PermissionUtils.permissionsCheck(getCurrentActivity(),new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE },new PermissionUtils.OnPermissionListener() {
       @Override
       public void onPermissionGranted() {
-        DownloadAndInstall.start(url,forceUpdate, getCurrentActivity(),applicationId);
+        DownloadAndInstall.start(url,forceUpdate, getCurrentActivity());
       }
       @Override
       public void onPermissionDenied(String[] deniedPermissions) {

@@ -1,11 +1,13 @@
 import { NativeModules,Platform } from 'react-native';
 const { RNSdkInstall } = NativeModules;
 
-export default class InstallSDK {
+const InstallUtil = {
 
-    static downloadAndInstall(url,forceUpdate,application_id) {
+    downloadAndInstall:function (url, forceUpdate) {
         if (Platform.OS === 'android') {
-            RNSdkInstall.downloadAndInstall(url,forceUpdate,application_id);
+            RNSdkInstall.downloadAndInstall(url,forceUpdate);
         }
     }
-};
+}
+
+export default InstallUtil;
