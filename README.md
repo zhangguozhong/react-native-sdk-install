@@ -30,12 +30,9 @@
 
 ## Usage
 ```javascript
-import InstallSDK from 'react-native-sdk-install';
-
-//检车版本更新下载并提示安装
+import InstallUtil from 'react-native-sdk-install';
 doCheckUpdate = () => {
-    //先检测是否有新版本，确认更新后再执行下载更新逻辑
-    InstallSDK.downloadAndInstall('https://domain/app-release.apk',forceUpdate,applicationId);
+    InstallUtil.downloadAndInstall('https://domain/app-release.apk',forceUpdate);
 };
 ```
 
@@ -57,8 +54,6 @@ doCheckUpdate = () => {
 </provider>
 
 ```
-
-2、InstallSDK.downloadAndInstall方法的applicationId参数取决于provider的android:authorities属性，传packageName或applicationId。
 
 
 
